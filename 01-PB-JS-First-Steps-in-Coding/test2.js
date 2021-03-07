@@ -1,1 +1,1 @@
-console.log(3);
+console.log(24 - (0.4 * 24));
