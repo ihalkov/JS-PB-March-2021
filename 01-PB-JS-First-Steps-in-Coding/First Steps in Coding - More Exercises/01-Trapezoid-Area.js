@@ -4,4 +4,4 @@ function trapezoidArea(input = []) {
     return area.toFixed(2);
 }
 
-// console.log(trapezoidArea([8, 13, 7]));
+console.log(trapezoidArea([8, 13, 7]));
