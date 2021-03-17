@@ -113,41 +113,181 @@ function transportPrice(input = []) {
 // ));
 
 function firm(input = []) {
-    
+    let [hoursNeeded, days, workersWithOvertime] = [...input].map(Number);
+    let overtime = workersWithOvertime * 2 * days;
+    days = days * 0.9;
+    let totalHours = Math.floor((days * 8) + overtime);
+
+    let timeDiff = Math.abs(hoursNeeded - totalHours);
+    if (hoursNeeded > totalHours) {
+        return `Not enough time!${timeDiff} hours needed.`;
+    }
+    return `Yes!${timeDiff} hours left.`;
 }
 
-console.log(firm(
-    [
-        '90', '7', '3'
-    ]
-));
-console.log(firm(
-    [
-        '99', '3', '1'
-    ]
-));
+// console.log(firm(
+//     [
+//         '90', '7', '3'
+//     ]
+// ));
+// console.log(firm(
+//     [
+//         '99', '3', '1'
+//     ]
+// ));
 
+function pets(input = []) {
+    let [days, availableFoodKg, dogDailyKg, catDailyKg, turtleDailyGr] = [...input].map(Number);
+    let foodNeeded = days * (dogDailyKg + catDailyKg + (turtleDailyGr / 1000));
+    let foodDiff = Math.abs(availableFoodKg - foodNeeded);
 
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
-console.log(pipesInPool());
+    if (availableFoodKg < foodNeeded) {
+        return `${Math.ceil(foodDiff)} more kilos of food are needed.`;
+    }
+    return `${Math.floor(foodDiff)} kilos of food left.`;
+}
+
+// console.log(pets(
+//     [
+//         '2',
+//         '10',
+//         '1',
+//         '1',
+//         '1200'
+//     ]
+// ));
+// console.log(pets(
+//     [
+//         '5',
+//         '10',
+//         '2.1',
+//         '0.8',
+//         '321'
+//     ]
+// ));
+
+function flowerShop(input = []) {
+    let [magnolii, ziumbiuli, roses, cactuses, presentPrice] = [...input].map(Number);
+    let totalMoney = (magnolii * 3.25) + (ziumbiuli * 4) + (roses * 3.5) + (cactuses * 8);
+    let profit = totalMoney * 0.95;
+    let moneyDiff = Math.abs(presentPrice - profit);
+    if (profit < presentPrice) {
+        return `She will have to borrow ${Math.ceil(moneyDiff)} leva.`;
+    }
+    return `She is left with ${Math.floor(moneyDiff)} leva.`;
+}
+// console.log(flowerShop(
+//     [
+//         '2',
+//         '3',
+//         '5',
+//         '1',
+//         '50'
+//     ]
+// ));
+// console.log(flowerShop(
+//     [
+//         '15',
+//         '7',
+//         '5',
+//         '10',
+//         '100'
+//     ]
+// ));
+
+function fuelTank(input = []) {
+    let fuelType = input[0];
+    fuelType = fuelType.toLowerCase();
+    let litersInTank = Number(input[1]);
+
+    if (fuelType !== 'diesel' && fuelType !== 'gas' && fuelType !== 'gasoline') {
+        return 'Invalid fuel!';
+    }
+
+    if (litersInTank >= 25) {
+        return `You have enough ${fuelType}.`;
+    }
+    return `Fill your tank with ${fuelType}!`;
+}
+// console.log(fuelTank(
+//     [
+//         'Diesel',
+//         '10'
+//     ]
+// ));
+// console.log(fuelTank(
+//     [
+//         'Gasoline',
+//         '40'
+//     ]
+// ));
+// console.log(fuelTank(
+//     [
+//         'Gas',
+//         '25'
+//     ]
+// ));
+// console.log(fuelTank(
+//     [
+//         'Kerosene',
+//         '200'
+//     ]
+// ));
+
+function fuelTank2(input = []) {
+    let fuelType = input[0];
+    fuelType = fuelType.toLowerCase();
+    let fuel = Number(input[1]);
+    let card = input[2];
+    let levaPerLiter = getLevaPerLiter(fuelType, card);
+    let total = fuel * levaPerLiter;
+
+    if (fuel > 25) {
+        total *= 0.9;
+    } else if (fuel > 20) {
+        total *= 0.92;
+    }
+    return `${total.toFixed(2)} lv.`;
+
+    function getLevaPerLiter(fuelType, card) {
+        let prices = {
+            gasoline: 2.22,
+            diesel: 2.33,
+            gas: 0.93
+        };
+
+        let discount = {
+            gasoline: 0.18,
+            diesel: 0.12,
+            gas: 0.08
+        };
+
+        let levaPerLiter = prices[fuelType];
+        if (card === 'Yes') {
+            levaPerLiter -= discount[fuelType];
+        }
+        return levaPerLiter;
+    }
+}
+
+// console.log(fuelTank2(
+//     [
+//         'Gas',
+//         '30',
+//         'Yes'
+//     ]
+// ));
+// console.log(fuelTank2(
+//     [
+//         'Gasoline',
+//         '25',
+//         'No'
+//     ]
+// ));
+// console.log(fuelTank2(
+//     [
+//         'Diesel',
+//         '19',
+//         'No'
+//     ]
+// ));
