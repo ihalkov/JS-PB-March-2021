@@ -177,18 +177,80 @@ function smallShop(input = []) {
 //     ]
 // ));
 
+function numberInRange(input = []) {
+    let num = Number(input[0]);
+    if (num >= -100 && num <= 100 && num !== 0) {
+        return 'Yes';
+    }
+    return 'No';
+}
+// console.log(numberInRange(['-25']));
+// console.log(numberInRange(['0']));
+// console.log(numberInRange(['25']));
 
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
-console.log(dayOfWeek());
+function workingHours(input = []) {
+    let time = Number(input[0]);
+    let day = input[1];
+    if (time >= 10 && time <= 18 && day !== 'Sunday') {
+        return 'open';
+    }
+    return 'closed';
+}
+// console.log(workingHours(
+//     [
+//         "11",
+//         "Monday"
+//     ]
+// ));
+// console.log(workingHours(
+//     [
+//         "19",
+//         "Friday"
+//     ]
+// ));
+// console.log(workingHours(
+//     [
+//         "11",
+//         "Sunday"
+//     ]
+// ));
+
+function cinemaTicket(input = []) {
+    let day = input[0];
+    // let str = 'Monday	Tuesday	Wednesday	Thursday	Friday	Saturday	Sunday';
+    // let str1 = '12	12	14	14	12	16	16';
+    let prices = {
+        Monday: 12,
+        Tuesday: 12,
+        Wednesday: 14,
+        Thursday: 14,
+        Friday: 12,
+        Saturday: 16,
+        Sunday: 16
+    };
+
+    return prices[day];
+}
+// console.log(cinemaTicket(['Monday']));
+// console.log(cinemaTicket(['Friday']));
+// console.log(cinemaTicket(['Sunday']));
+
+function fruitOrVegetable(input = []) {
+    let product = input[0];
+    let fruits = ['banana', 'apple', 'kiwi', 'cherry', 'lemon', 'grapes'];
+    let veggies = ['tomato', 'cucumber', 'pepper', 'carrot'];
+    if (fruits.includes(product)) {
+        return 'fruit';
+    } else if (veggies.includes(product)) {
+        return 'vegetable';
+    }
+    return 'unknown';
+}
+// console.log(fruitOrVegetable(['banana']));
+// console.log(fruitOrVegetable(['apple']));
+// console.log(fruitOrVegetable(['tomato']));
+// console.log(fruitOrVegetable(['water']));
+
+
+
 console.log(dayOfWeek());
