@@ -103,10 +103,6 @@ function personalTitles(input = []) {
 // ));
 
 function smallShop(input = []) {
-    //     град / продукт	coffee	water	beer	sweets	peanuts
-    // Sofia	0.50	0.80	1.20	1.45	1.60
-    // Plovdiv	0.40	0.70	1.15	1.30	1.50
-    // Varna	0.45	0.70	1.10	1.35	1.55
     let [product, town, qty] = [...input];
     qty = Number(qty);
 
@@ -251,6 +247,194 @@ function fruitOrVegetable(input = []) {
 // console.log(fruitOrVegetable(['tomato']));
 // console.log(fruitOrVegetable(['water']));
 
+function invalidNumber(input = []) {
+    let num = Number(input[0]);
+    if ((num < 100 || num > 200) && num !== 0) {
+        return 'invalid';
+    }
+    return '';
+}
+
+// console.log(invalidNumber(['75']));
+// console.log(invalidNumber(['150']));
+// console.log(invalidNumber(['220']));
+// console.log(invalidNumber(['199']));
+// console.log(invalidNumber(['-1']));
+// console.log(invalidNumber(['100']));
+// console.log(invalidNumber(['200']));
+// console.log(invalidNumber(['0']));
 
 
-console.log(dayOfWeek());
+function fruitShop(input = []) {
+    let [fruit, day, qty] = [...input].map(x => isNaN(x) ? x : Number(x));
+    let workdaysPrices = {
+        banana: 2.50,
+        apple: 1.20,
+        orange: 0.85,
+        grapefruit: 1.45,
+        kiwi: 2.70,
+        pineapple: 5.50,
+        grapes: 3.85
+    };
+
+    let weekendPrices = {
+        banana: 2.70,
+        apple: 1.25,
+        orange: 0.90,
+        grapefruit: 1.60,
+        kiwi: 3.00,
+        pineapple: 5.60,
+        grapes: 4.20
+    };
+
+    let workdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    let weekend = ['Saturday', 'Sunday'];
+
+    if (weekend.includes(day) && weekendPrices.hasOwnProperty(fruit)) {
+        let price = weekendPrices[fruit];
+        let result = price * qty
+        return result.toFixed(2);
+    } else if (workdays.includes(day) && workdaysPrices.hasOwnProperty(fruit)) {
+        let price = workdaysPrices[fruit];
+        let result = price * qty;
+        return result.toFixed(2);
+    }
+    return 'error';
+}
+// console.log(fruitShop(
+//     [
+//         "apple",
+//         "Tuesday",
+//         "2"
+//     ]));
+// console.log(fruitShop(
+//     [
+//         "orange",
+//         "Sunday",
+//         "3"
+//     ]));
+// console.log(fruitShop(
+//     [
+//         "kiwi",
+//         "Monday",
+//         "2.5"
+//     ]
+// ));
+// console.log(fruitShop(
+//     [
+//         "grapes",
+//         "Saturday",
+//         "0.5"
+//     ]
+// ));
+// console.log(fruitShop(
+//     [
+//         "tomato",
+//         "Monday",
+//         "0.5"
+//     ]
+// ));
+
+function tradeCommissions(input = []) {
+    let town = input[0];
+    let sells = Number(input[1]);
+
+    let belowEqual500 = {
+        Sofia: 0.05,
+        Varna: 0.045,
+        Plovdiv: 0.055
+    };
+    let belowEqual1000 = {
+        Sofia: 0.07,
+        Varna: 0.075,
+        Plovdiv: 0.08
+    };
+    let belowEqual10000 = {
+        Sofia: 0.08,
+        Varna: 0.1,
+        Plovdiv: 0.12
+    }
+    let above10000 = {
+        Sofia: 0.12,
+        Varna: 0.13,
+        Plovdiv: 0.145
+    }
+    let towns = ['Sofia', 'Varna', 'Plovdiv'];
+
+    if (sells > 10000 && towns.includes(town)) {
+        let commission = above10000[town] * sells;
+        return commission.toFixed(2);
+    } else if (sells > 1000 && towns.includes(town)) {
+        let commission = belowEqual10000[town] * sells;
+        return commission.toFixed(2);
+    } else if (sells > 500 && towns.includes(town)) {
+        let commission = belowEqual1000[town] * sells;
+        return commission.toFixed(2);
+    } else if (sells >= 0 && sells <= 500 && towns.includes(town)) {
+        let commission = belowEqual500[town] * sells;
+        return commission.toFixed(2);
+    }
+    return 'error';
+}
+// console.log(tradeCommissions(['Sofia', '1500']));
+// console.log(tradeCommissions(['Plovdiv', '499.99']));
+// console.log(tradeCommissions(['Varna', '3874.50']));
+// console.log(tradeCommissions(['Kaspichan', '-50']));
+
+function skiTrip(input = []) {
+    let [days, typeRoom, score] = [...input].map(x => isNaN(x) ? x : Number(x));
+    let nights = days - 1;
+
+    let prices = {
+        "room for one person": 18.00,
+        "apartment": 25.00,
+        "president apartment": 35.00
+    };
+
+    let total = prices[typeRoom] * nights;
+    let discount = total * (1 - getDiscountPercent(days, typeRoom));
+
+    if (score === 'positive') {
+        return (discount * 1.25).toFixed(2);
+    }
+    return (discount * 0.9).toFixed(2);
+
+    function getDiscountPercent(days, typeRoom) {
+        if (days < 10) {
+            let disc = {
+                "room for one person": 0,
+                "apartment": 0.3,
+                "president apartment": 0.1
+            };
+            return disc[typeRoom];
+        } else if (days < 15) {
+            let disc = {
+                "room for one person": 0,
+                "apartment": 0.35,
+                "president apartment": 0.15
+            };
+            return disc[typeRoom];
+        } else if (days > 15) {
+            let disc = {
+                "room for one person": 0,
+                "apartment": 0.5,
+                "president apartment": 0.2
+            };
+            return disc[typeRoom];
+        }
+    }
+}
+// console.log(skiTrip(
+//     [
+//         "14",
+//         "apartment",
+//         "positive"
+//     ]
+// ));
+// console.log(skiTrip(
+//     [
+//         "30",
+//         "president apartment",
+//         "negative"
+//     ]
+// ));

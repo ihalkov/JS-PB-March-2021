@@ -1,5 +1,5 @@
-let str = 'Monday	Tuesday	Wednesday	Thursday	Friday	Saturday	Sunday';
-    let str1 = '12	12	14	14	12	16	16';
+let str = 'Sofia Varna Plovdiv';
+    let str1 = '5% 4.5% 5.5%';
 
     let pattern = /[\s]+|[\t]+/g;
     let arr1 = str.split(pattern);
