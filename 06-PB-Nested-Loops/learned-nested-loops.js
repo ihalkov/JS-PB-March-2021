@@ -11,3 +11,12 @@ while (i < 4) {
 // case 1 || case 2 || case 3
 // This method takes advantage of the fact that if there is no break below a case clause
 // it will continue to execute the next case clause regardless if the case meets the criteria.
+
+// Composite numbers can be arranged into rectangles but prime numbers cannot
+
+// always to check ourselves
+function(arr){
+
+  console.log(arr);
+  
+}
